@@ -1,0 +1,14 @@
+identifier: our_board
+name: This is our board
+vendor: iomico
+type: mcu
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+ram: 32
+flash: 256
+supported:
+  - gpio
+  - uart
+  - i2c
