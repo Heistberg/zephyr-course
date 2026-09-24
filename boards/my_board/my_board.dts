@@ -1,0 +1,123 @@
+/dts-v1/;
+
+#include <renesas/ra/ra4/r7fa4m1ab3cfm.dtsi>
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/gpio/arduino-header-r3.h>
+
+/{
+	model = "my board";
+	compatible = "renesas,ra4m1", "renesas,ra";
+
+	aliases {
+		led0 = &led;
+	};
+
+	chosen{
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+		zephyr,code-partition = &code_partition;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		led: led {
+			gpios = <&arduino_header ARDUINO_HEADER_R3_D13 GPIO_ACTIVE_HIGH>;
+		};
+	};
+
+	arduino_header: connector {
+		compatible = "arduino-header-r3";
+		#gpio-cells = <2>;
+		gpio-map-mask = <0xffffffff 0xffffffc0>;
+		gpio-map-pass-thru = <0 0x3f>;
+		gpio-map = <ARDUINO_HEADER_R3_A0 0 &ioport0 14 0>,
+			   <ARDUINO_HEADER_R3_A1 0 &ioport0 0 0>,
+			   <ARDUINO_HEADER_R3_A2 0 &ioport0 1 0>,
+			   <ARDUINO_HEADER_R3_A3 0 &ioport0 2 0>,
+			   <ARDUINO_HEADER_R3_A4 0 &ioport1 1 0>,
+			   <ARDUINO_HEADER_R3_A5 0 &ioport1 0 0>,
+			   <ARDUINO_HEADER_R3_D0 0 &ioport3 1 0>,
+			   <ARDUINO_HEADER_R3_D1 0 &ioport3 2 0>,
+			   <ARDUINO_HEADER_R3_D2 0 &ioport1 4 0>,
+			   <ARDUINO_HEADER_R3_D3 0 &ioport1 5 0>,
+			   <ARDUINO_HEADER_R3_D4 0 &ioport1 6 0>,
+			   <ARDUINO_HEADER_R3_D5 0 &ioport1 7 0>,
+			   <ARDUINO_HEADER_R3_D6 0 &ioport1 11 0>,
+			   <ARDUINO_HEADER_R3_D7 0 &ioport1 12 0>,
+			   <ARDUINO_HEADER_R3_D8 0 &ioport3 4 0>,
+			   <ARDUINO_HEADER_R3_D9 0 &ioport3 3 0>,
+			   <ARDUINO_HEADER_R3_D10 0 &ioport1 3 0>,
+			   <ARDUINO_HEADER_R3_D11 0 &ioport4 11 0>,
+			   <ARDUINO_HEADER_R3_D12 0 &ioport4 10 0>,
+			   <ARDUINO_HEADER_R3_D13 0 &ioport1 2 0>,
+			   <ARDUINO_HEADER_R3_D14 0 &ioport1 1 0>,
+			   <ARDUINO_HEADER_R3_D15 0 &ioport1 0 0>;
+	};
+
+};
+
+&ioport1 {
+	status = "okay";
+};
+
+&ioport3 {
+	status = "okay";
+};
+
+&ioport4 {
+	status = "okay";
+};
+
+&hoco {
+	status = "okay";
+	clock-frequency = <48000000>;
+};
+
+&pclkblock {
+	clocks = <&hoco>;
+};
+
+&iclk {
+	div = <1>;
+};
+
+&pclka {
+	div = <1>;
+};
+
+&pclkb {
+	div = <2>;
+};
+
+&pclkc {
+	div = <1>;
+};
+
+&pclkd {
+	div = <1>;
+};
+
+&fclk {
+	div = <2>;
+};
+
+&flash0 {
+	partitions {
+		compatible = "fixed-partitions";
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		boot_partition: partition@0 {
+			label = "bootloader";
+			reg = <0x00000000 0x4000>;
+			read-only;
+		};
+
+		code_partition: partition@4000 {
+			label = "code";
+			reg = <0x4000 0x3c000>;
+			read-only;
+		};
+	};
+};
