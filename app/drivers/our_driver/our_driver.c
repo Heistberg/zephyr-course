@@ -9,6 +9,22 @@ LOG_MODULE_REGISTER(our_driver, LOG_LEVEL_INF);
 
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
+typedef struct{
+    int custom_value;
+}my_sensor_data_t;
+
+static my_sensor_data_t my_sensor_data;
+
+int our_driver_set_custom_value(const struct device *dev, int value)
+{
+    my_sensor_data_t *data = dev->data;
+
+    data->custom_value = value;
+    LOG_INF("New custom value: %d", value);
+
+    return 0;
+}
+
 static int channel_get_my_impl(const struct device *dev,
 				    enum sensor_channel chan,
 				    struct sensor_value *val)
@@ -47,4 +63,4 @@ static int init(const struct device* dev)
     return 0;
 }
 
-DEVICE_DT_INST_DEFINE(0, init, NULL, NULL, NULL, POST_KERNEL, 80, &api_iomico_lecture);
+DEVICE_DT_INST_DEFINE(0, init, NULL, &my_sensor_data, NULL, POST_KERNEL, 80, &api_iomico_lecture);
