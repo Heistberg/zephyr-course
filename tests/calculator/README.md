@@ -87,8 +87,12 @@ west twister -T tests/calculator \
 # Coverage report
 west twister -T tests/calculator -p native_sim \
     --coverage --coverage-tool gcovr \
-    --coverage-basedir app/modules/calculator
+    --coverage-basedir app/modules/calculator \
+    --gcov-tool gcov
 ```
+
+Make sure `gcovr` and `gcov` are available on `PATH` (for example, activate
+the project's Python virtual environment before running Twister).
 
 ## Expected output
 

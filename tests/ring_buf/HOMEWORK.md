@@ -124,7 +124,8 @@ After every test passes, tag the commit `l8-task1`.
 ```bash
 west twister -T tests/ring_buf -p native_sim \
     --coverage --coverage-tool gcovr \
-    --coverage-basedir app/modules/ring_buf
+    --coverage-basedir app/modules/ring_buf \
+    --gcov-tool gcov
 ```
 
 **Windows**

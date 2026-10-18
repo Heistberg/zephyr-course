@@ -47,7 +47,13 @@ ZTEST(ring_buf_init, test_reinit_clears_state)
 	 * verify the buffer is empty and count is 0.
 	 * See TEST_SPEC.md "Suite ring_buf_init" #2.
 	 */
-	ztest_test_skip();
+	int value = 2;
+
+	zassume_ok(rb_push(value), "New buffer must accept new values");
+	zassume_false(rb_is_empty(), "Used buffer must not be empty");
+	zassert_ok(rb_init(value), "Buffer must initialize as many times as needed");
+	zassert_true(rb_is_empty(), "New buffer must be empty");
+	zassert_equal(rb_count(), 0, "New buffer must be emtpy");
 }
 
 /*
@@ -64,7 +70,13 @@ ZTEST(ring_buf_push_pop, test_single_push_pop)
 	/* TODO(l8-task1): rb_push(42), rb_pop(&v) -> v == 42, buffer empty after.
 	 * See TEST_SPEC.md "Suite ring_buf_push_pop" #1.
 	 */
-	ztest_test_skip();
+	int value_push = 42;
+	int value_pop = 0;
+
+	zassert_ok(rb_push(value_push), "New buffer must accept new values");
+	zassert_ok(rb_pop(&value_pop), "Buffer with values present must pop values");
+	zassert_equal(value_push, value_pop, "Buffer must preserve values");
+	zassert_true(rb_is_empty(), "After popping all values buffer must be empty");
 }
 
 ZTEST(ring_buf_push_pop, test_fifo_order)
@@ -73,7 +85,21 @@ ZTEST(ring_buf_push_pop, test_fifo_order)
 	 * and verify the values come out as 1, 2, 3 in that order.
 	 * See TEST_SPEC.md "Suite ring_buf_push_pop" #2.
 	 */
-	ztest_test_skip();
+	int val1 = 15;
+	int val2 = 37;
+	int val3 = 88;
+	int value_pop = 0;
+
+	zassert_ok(rb_push(val1), "Non full buffer must accept new values");
+	zassert_ok(rb_push(val2), "Non full buffer must accept new values");
+	zassert_ok(rb_push(val3), "Non full buffer must accept new values");
+	zassert_ok(rb_pop(&value_pop), "Non empty buffer must pop values");
+	zassert_equal(val1, value_pop, "Buffer must pop values in FIFO order");
+	zassert_ok(rb_pop(&value_pop), "Non empty buffer must pop values");
+	zassert_equal(val2, value_pop, "Buffer must pop values in FIFO order");
+	zassert_ok(rb_pop(&value_pop), "Non empty buffer must pop values");
+	zassert_equal(val3, value_pop, "Buffer must pop values in FIFO order");
+	zassert_true(rb_is_empty(), "After popping all values the buffer must be empty");
 }
 
 ZTEST(ring_buf_push_pop, test_push_full_returns_enospc)
@@ -82,7 +108,12 @@ ZTEST(ring_buf_push_pop, test_push_full_returns_enospc)
 	 * one more value -> -ENOSPC.
 	 * See TEST_SPEC.md "Suite ring_buf_push_pop" #3.
 	 */
-	ztest_test_skip();
+	zassume_ok(rb_push(1), "Non full buffer must accept new values");	
+	zassume_ok(rb_push(2), "Non full buffer must accept new values");	
+	zassume_ok(rb_push(3), "Non full buffer must accept new values");	
+	zassume_ok(rb_push(4), "Non full buffer must accept new values");
+	zassume_true(rb_is_full(), "Full buffer must return is_full to TRUE");
+	zassert_equal(rb_push(5), -ENOSPC, "Full buffer must return -ENOSPC");
 }
 
 /*
@@ -100,7 +131,16 @@ ZTEST(ring_buf_boundaries, test_peek_does_not_consume)
 	 * -> v == 7; rb_count() still == 1.
 	 * See TEST_SPEC.md "Suite ring_buf_boundaries" #1.
 	 */
-	ztest_test_skip();
+	int val_push = 7;
+	int val_peek = 0;
+
+	zassume_ok(rb_push(val_push), "Non full buffer must accept new values");
+	zassert_ok(rb_peek(&val_peek), "Non empty buffer must peek values");
+	zassert_equal(val_push, val_peek, "Peek must return the oldest value");
+	val_peek = 0;
+	zassert_ok(rb_peek(&val_peek), "Non empty buffer must peek values");
+	zassert_equal(val_push, val_peek, "Peek must return the oldest value");
+	zassert_equal(rb_count(), 1, "Peek must not consume");
 }
 
 ZTEST(ring_buf_boundaries, test_pop_null_returns_einval)
@@ -108,7 +148,7 @@ ZTEST(ring_buf_boundaries, test_pop_null_returns_einval)
 	/* TODO(l8-task1): rb_pop(NULL) -> -EINVAL.
 	 * See TEST_SPEC.md "Suite ring_buf_boundaries" #2.
 	 */
-	ztest_test_skip();
+	zassert_equal(rb_pop(NULL), -EINVAL, "Passing a null pointer must return -EINVAL");
 }
 
 ZTEST(ring_buf_boundaries, test_is_full_after_fill)
@@ -116,5 +156,10 @@ ZTEST(ring_buf_boundaries, test_is_full_after_fill)
 	/* TODO(l8-task1): push 4 values -> rb_is_full() == true, rb_count() == 4.
 	 * See TEST_SPEC.md "Suite ring_buf_boundaries" #3.
 	 */
-	ztest_test_skip();
+	zassume_ok(rb_push(1), "Non full buffer must accept new values");	
+	zassume_ok(rb_push(2), "Non full buffer must accept new values");	
+	zassume_ok(rb_push(3), "Non full buffer must accept new values");	
+	zassume_ok(rb_push(4), "Non full buffer must accept new values");
+	zassert_true(rb_is_full(), "Full buffer must return TRUE");
+	zassert_equal(rb_count(), 4, "Full buffer must return count 4");
 }
