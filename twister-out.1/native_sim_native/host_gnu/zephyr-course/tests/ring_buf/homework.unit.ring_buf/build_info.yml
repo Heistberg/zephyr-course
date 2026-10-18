@@ -1,0 +1,44 @@
+cmake:
+  application:
+    configuration-dir: '/home/daniel/Zephyr/zephyr-course/tests/ring_buf'
+    source-dir: '/home/daniel/Zephyr/zephyr-course/tests/ring_buf'
+  board:
+    name: 'native_sim'
+    path:
+     - '/home/daniel/Zephyr/deps/zephyr/boards/native/native_sim'
+    qualifiers: 'native'
+    revision: ''
+  devicetree:
+    bindings-dirs:
+     - '/home/daniel/Zephyr/deps/zephyr/dts/bindings'
+    files:
+     - '/home/daniel/Zephyr/deps/zephyr/boards/native/native_sim/native_sim.dts'
+    include-dirs:
+     - '/home/daniel/Zephyr/deps/zephyr/include'
+     - '/home/daniel/Zephyr/deps/zephyr/include/zephyr'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/common'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/vendor'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/rx'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/x86'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/xtensa'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/sparc'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/riscv'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/posix'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/arm64'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/arm'
+     - '/home/daniel/Zephyr/deps/zephyr/dts/arc'
+     - '/home/daniel/Zephyr/deps/zephyr/dts'
+  kconfig:
+    files:
+     - '/home/daniel/Zephyr/deps/zephyr/boards/native/native_sim/native_sim_defconfig'
+     - '/home/daniel/Zephyr/zephyr-course/tests/ring_buf/prj.conf'
+     - '/home/daniel/Zephyr/zephyr-course/twister-out/native_sim_native/host_gnu/zephyr-course/tests/ring_buf/homework.unit.ring_buf/zephyr/misc/generated/extra_kconfig_options.conf'
+    user-files:
+     - '/home/daniel/Zephyr/zephyr-course/tests/ring_buf/prj.conf'
+  toolchain:
+    name: 'host'
+    path: ''
+  zephyr:
+    version: '4.4.2'
+    zephyr-base: '/home/daniel/Zephyr/deps/zephyr'
+version: '0.1.0'

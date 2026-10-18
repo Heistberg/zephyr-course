@@ -5480,37 +5480,6 @@ events:
       CMAKE_SYSTEM_PROGRAM_PATH:
         - "/bin"
   -
-    kind: "try_compile-v1"
-    backtrace:
-      - "/usr/share/cmake-4.2/Modules/Internal/CheckSourceCompiles.cmake:104 (try_compile)"
-      - "/usr/share/cmake-4.2/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
-      - "/usr/share/cmake-4.2/Modules/CheckCCompilerFlag.cmake:105 (cmake_check_compiler_flag)"
-      - "/home/daniel/Zephyr/deps/zephyr/cmake/modules/extensions.cmake:2421 (check_c_compiler_flag)"
-      - "/home/daniel/Zephyr/deps/zephyr/cmake/modules/extensions.cmake:1199 (check_compiler_flag)"
-      - "/home/daniel/Zephyr/deps/zephyr/cmake/modules/extensions.cmake:2460 (zephyr_check_compiler_flag)"
-      - "/home/daniel/Zephyr/deps/zephyr/cmake/modules/extensions.cmake:2436 (target_cc_option_fallback)"
-      - "/home/daniel/Zephyr/deps/zephyr/cmake/modules/extensions.cmake:156 (target_cc_option)"
-      - "/home/daniel/Zephyr/deps/zephyr/CMakeLists.txt:634 (zephyr_cc_option)"
-    directories:
-      source: "/home/daniel/Zephyr/zephyr-course/twister-out/native_sim_native/host_gnu/zephyr-course/tests/ring_buf/homework.unit.ring_buf/CMakeFiles/CMakeScratch/TryCompile-NUy0jM"
-      binary: "/home/daniel/Zephyr/zephyr-course/twister-out/native_sim_native/host_gnu/zephyr-course/tests/ring_buf/homework.unit.ring_buf/CMakeFiles/CMakeScratch/TryCompile-NUy0jM"
-    cmakeVariables:
-      CMAKE_C_FLAGS: ""
-      CMAKE_C_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
-      CMAKE_MODULE_PATH: "/home/daniel/Zephyr/deps/zephyr/cmake/modules"
-    buildResult:
-      variable: "check_fmacro_prefix_map__home_daniel_Zephyr_zephyr_course_tests_ring_buf_CMAKE_SOURCE_DIR_C__fuse_ld_bfd"
-      cached: true
-      stdout: |
-        Change Dir: '/home/daniel/Zephyr/zephyr-course/twister-out/native_sim_native/host_gnu/zephyr-course/tests/ring_buf/homework.unit.ring_buf/CMakeFiles/CMakeScratch/TryCompile-NUy0jM'
-        
-        Run Build Command(s): /usr/bin/ninja -v cmTC_f1369
-        [1/2] /usr/bin/gcc -Dcheck_fmacro_prefix_map__home_daniel_Zephyr_zephyr_course_tests_ring_buf_CMAKE_SOURCE_DIR_C__fuse_ld_bfd  -fuse-ld=bfd   -fmacro-prefix-map=/home/daniel/Zephyr/zephyr-course/tests/ring_buf=CMAKE_SOURCE_DIR -o CMakeFiles/cmTC_f1369.dir/src.c.obj -c /home/daniel/Zephyr/zephyr-course/twister-out/native_sim_native/host_gnu/zephyr-course/tests/ring_buf/homework.unit.ring_buf/CMakeFiles/CMakeScratch/TryCompile-NUy0jM/src.c
-        [2/2] : && /usr/bin/gcc -fuse-ld=bfd  CMakeFiles/cmTC_f1369.dir/src.c.obj -o cmTC_f1369   && :
-        
-      exitCode: 0
-  -
     kind: "find-v1"
     backtrace:
       - "/home/daniel/Zephyr/deps/zephyr/cmake/kobj.cmake:3 (find_program)"

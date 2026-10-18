@@ -351,6 +351,9 @@ NSI_DIR:PATH=/home/daniel/Zephyr/deps/zephyr/scripts/native_simulator
 //Path to a program.
 OPENOCD:FILEPATH=OPENOCD-NOTFOUND
 
+//No help, variable specified on the command line.
+OVERLAY_CONFIG:UNINITIALIZED=/home/daniel/Zephyr/zephyr-course/twister-out/native_sim_native/host_gnu/zephyr-course/tests/ring_buf/homework.unit.ring_buf/twister/testsuite_extra.conf
+
 //Path to a program.
 PAHOLE:FILEPATH=PAHOLE-NOTFOUND
 
@@ -370,7 +373,7 @@ SOC_FULL_DIR:PATH=/home/daniel/Zephyr/deps/zephyr/soc/native/inf_clock
 TC_NAME:UNINITIALIZED=homework.unit.ring_buf
 
 //No help, variable specified on the command line.
-TC_RUNID:UNINITIALIZED=82bbab4b674dea0532378ad8e450bd62
+TC_RUNID:UNINITIALIZED=285e72a846b3ba0c1be36b15259e510b
 
 //True if toolchain supports libstdc++
 TOOLCHAIN_HAS_GLIBCXX:BOOL=ON
@@ -615,6 +618,4 @@ _Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;14;4;64;<none>;cpython-314-x86
 _Python3_INTERPRETER_SIGNATURE:INTERNAL=aeedd1964aeecd88c35ab8f97b51d6f4
 //NumPy reason failure
 _Python3_NumPy_REASON_FAILURE:INTERNAL=
-//Test check_fmacro_prefix_map__home_daniel_Zephyr_zephyr_course_tests_ring_buf_CMAKE_SOURCE_DIR_C__fuse_ld_bfd
-check_fmacro_prefix_map__home_daniel_Zephyr_zephyr_course_tests_ring_buf_CMAKE_SOURCE_DIR_C__fuse_ld_bfd:INTERNAL=1
 
