@@ -2,7 +2,7 @@
 #include <zephyr/kernel.h>
 
 static int board_my_board_init(void){
-    printk("HELLO\n");
+    printk("Board Initialized\n");
     return 0;
 }
 
