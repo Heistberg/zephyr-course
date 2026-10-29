@@ -37,7 +37,7 @@ static int cmd_info(const struct shell *sh, size_t argc, char **argv)
 
 SHELL_STATIC_SUBCMD_SET_CREATE(
     sub_sensor,
-    SHELL_CMD_ARG(fetch, NULL, "fetch sensor data", cmd_fetch, 2, 0),
+    SHELL_CMD(fetch, NULL, "fetch sensor data", cmd_fetch),
     SHELL_CMD_ARG(read, NULL, "read sensor data", cmd_read, 2, 0),
     SHELL_CMD_ARG(info, NULL, "info sensor data", cmd_info, 1, 0),
     SHELL_SUBCMD_SET_END
