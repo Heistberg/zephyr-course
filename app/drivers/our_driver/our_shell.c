@@ -41,16 +41,25 @@ static int cmd_set(const struct shell *sh, size_t argc, char **argv)
     int err;
     int value = (int)shell_strtol(argv[1], 10, &err);
 
-    int r_value = our_driver_set_custom_value(shell_driver, value);
-
-    if(value > 1000){
+    if(value < 10)
+    {
+        shell_error(sh, "Input argument too small. Minimum 10, current %d", value);
+        return -1;
+    }
+    else if(value > 1000)
+    {
         shell_error(sh, "Input argument too large. Maximum 1000, current %d", value);
         return -1;
     }
 
-    if(r_value == 0){
-        shell_print(sh, "Sensor set: %d", value);
+    int r_value = our_driver_set_custom_value(shell_driver, value);
+
+    if(r_value != 0){
+        shell_error(sh, "Something went wrong!");
+        return -1;
     }
+
+    shell_print(sh, "Sensor set: %d", value);
     return 0;
 }
 
